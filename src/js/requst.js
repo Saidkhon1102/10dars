@@ -1,4 +1,3 @@
-// API request handling and data management
 class ApiService {
   constructor() {
     this.baseUrl = ""
@@ -7,7 +6,6 @@ class ApiService {
     }
   }
 
-  // Generic request method
   async request(url, options = {}) {
     try {
       const config = {
@@ -28,7 +26,6 @@ class ApiService {
     }
   }
 
-  // GET request
   async get(url, headers = {}) {
     return this.request(url, {
       method: "GET",
@@ -36,7 +33,6 @@ class ApiService {
     })
   }
 
-  // POST request
   async post(url, data, headers = {}) {
     return this.request(url, {
       method: "POST",
@@ -45,7 +41,6 @@ class ApiService {
     })
   }
 
-  // PUT request
   async put(url, data, headers = {}) {
     return this.request(url, {
       method: "PUT",
@@ -54,7 +49,6 @@ class ApiService {
     })
   }
 
-  // DELETE request
   async delete(url, headers = {}) {
     return this.request(url, {
       method: "DELETE",
@@ -63,18 +57,14 @@ class ApiService {
   }
 }
 
-// Product service for handling product-related API calls
 class ProductService extends ApiService {
   constructor() {
     super()
     this.productsEndpoint = "/api/products"
   }
 
-  // Get all products
   async getAllProducts() {
     try {
-      // In a real application, this would make an API call
-      // For now, we'll return the sample data
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(this.getSampleProducts())
@@ -82,11 +72,10 @@ class ProductService extends ApiService {
       })
     } catch (error) {
       console.error("Error fetching products:", error)
-      return this.getSampleProducts() // Fallback to sample data
+      return this.getSampleProducts()
     }
   }
 
-  // Get product by ID
   async getProductById(id) {
     try {
       const products = await this.getAllProducts()
@@ -97,7 +86,6 @@ class ProductService extends ApiService {
     }
   }
 
-  // Search products
   async searchProducts(query) {
     try {
       const products = await this.getAllProducts()
@@ -112,7 +100,6 @@ class ProductService extends ApiService {
     }
   }
 
-  // Get sample products (fallback data)
   getSampleProducts() {
     return [
       {
@@ -206,20 +193,15 @@ class ProductService extends ApiService {
   }
 }
 
-// Order service for handling order-related operations
 class OrderService extends ApiService {
   constructor() {
     super()
     this.ordersEndpoint = "/api/orders"
   }
 
-  // Create new order
   async createOrder(orderData) {
     try {
-      // In a real application, this would make an API call
       console.log("Creating order:", orderData)
-
-      // Simulate API call
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({
@@ -235,11 +217,9 @@ class OrderService extends ApiService {
     }
   }
 
-  // Get order by ID
   async getOrderById(orderId) {
     try {
       console.log("Fetching order:", orderId)
-      // Simulate API call
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({
@@ -257,13 +237,10 @@ class OrderService extends ApiService {
   }
 }
 
-// Global service instances
 const productService = new ProductService()
 const orderService = new OrderService()
 
-// Utility functions for data handling
 const DataUtils = {
-  // Format price for display
   formatPrice(price) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -271,7 +248,6 @@ const DataUtils = {
     }).format(price)
   },
 
-  // Format date for display
   formatDate(date) {
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -280,18 +256,15 @@ const DataUtils = {
     }).format(new Date(date))
   },
 
-  // Validate email
   isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
   },
 
-  // Generate unique ID
   generateId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2)
   },
 
-  // Debounce function for search
   debounce(func, wait) {
     let timeout
     return function executedFunction(...args) {
@@ -305,7 +278,6 @@ const DataUtils = {
   },
 }
 
-// Export services for global use
 window.services = {
   product: productService,
   order: orderService,

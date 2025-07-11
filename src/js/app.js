@@ -1,18 +1,10 @@
-// Main application initialization
 document.addEventListener("DOMContentLoaded", () => {
   console.log("ShopHub E-commerce App Initialized")
-
-  // Initialize cart count from localStorage
   updateCartCount()
-
-  // Load products
   loadProducts()
-
-  // Add smooth scroll behavior
   document.documentElement.style.scrollBehavior = "smooth"
 })
 
-// Function to update cart count
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]")
   const cartCountElement = document.getElementById("cart-count")
@@ -20,7 +12,6 @@ function updateCartCount() {
     cartCountElement.textContent = cart.reduce((total, item) => total + item.quantity, 0)
   }
 }
-
 
 const sampleProducts = [
   {
@@ -87,11 +78,9 @@ const sampleProducts = [
   },
 ]
 
-
 function loadProducts() {
   const productsGrid = document.getElementById("products-grid")
   const loading = document.getElementById("loading") 
-
 
   if (loading) {
     loading.style.display = "none"
@@ -104,7 +93,6 @@ function loadProducts() {
     productsGrid.appendChild(productCard)
   })
 }
-
 
 function createProductCard(product) {
   const card = document.createElement("div")
@@ -130,7 +118,6 @@ function createProductCard(product) {
   return card
 }
 
-
 function redirectToProductDetails(product) {
   const params = new URLSearchParams({
     id: product.id,
@@ -143,16 +130,11 @@ function redirectToProductDetails(product) {
   window.location.href = `about.html?${params.toString()}`
 }
 
-// Add product to cart
 function addToCart(productId) {
   const product = sampleProducts.find((p) => p.id === productId)
   if (product) {
-    // Get existing cart from localStorage
     const cart = JSON.parse(localStorage.getItem("cart") || "[]")
-
-    // Check if product already exists in cart
     const existingItem = cart.find((item) => item.id === productId)
-
     if (existingItem) {
       existingItem.quantity += 1
     } else {
@@ -164,21 +146,13 @@ function addToCart(productId) {
         quantity: 1,
       })
     }
-
-    // Save cart to localStorage
     localStorage.setItem("cart", JSON.stringify(cart))
-
-    // Update cart count
     updateCartCount()
-
-    // Show success message
     showToast("Product added to cart!", "success")
   }
 }
 
-// Show toast notification
 function showToast(message, type = "info") {
-  // Create toast element
   const toast = document.createElement("div")
   toast.className = `alert alert-${type} fixed top-4 right-4 z-50 w-auto max-w-sm animate-slide-in`
   toast.innerHTML = `
@@ -187,10 +161,7 @@ function showToast(message, type = "info") {
         </svg>
         <span>${message}</span>
     `
-
   document.body.appendChild(toast)
-
-  // Remove toast after 3 seconds
   setTimeout(() => {
     toast.remove()
   }, 3000)

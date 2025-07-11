@@ -1,4 +1,3 @@
-// UI update and animation utilities
 class UIManager {
   constructor() {
     this.animationDuration = 300
@@ -6,7 +5,6 @@ class UIManager {
     this.initializeToastContainer()
   }
 
-  // Initialize toast container
   initializeToastContainer() {
     this.toastContainer = document.createElement("div")
     this.toastContainer.id = "toast-container"
@@ -14,7 +12,6 @@ class UIManager {
     document.body.appendChild(this.toastContainer)
   }
 
-  // Show loading state
   showLoading(element, text = "Loading...") {
     if (typeof element === "string") {
       element = document.getElementById(element)
@@ -30,7 +27,6 @@ class UIManager {
     }
   }
 
-  // Hide loading state
   hideLoading(element) {
     if (typeof element === "string") {
       element = document.getElementById(element)
@@ -41,7 +37,6 @@ class UIManager {
     }
   }
 
-  // Show toast notification
   showToast(message, type = "info", duration = 3000) {
     const toast = document.createElement("div")
     const toastId = "toast-" + Date.now()
@@ -76,7 +71,6 @@ class UIManager {
 
     this.toastContainer.appendChild(toast)
 
-    // Auto remove after duration
     setTimeout(() => {
       const toastElement = document.getElementById(toastId)
       if (toastElement) {
@@ -86,7 +80,6 @@ class UIManager {
     }, duration)
   }
 
-  // Animate element entrance
   animateIn(element, animationType = "fadeInUp") {
     if (typeof element === "string") {
       element = document.getElementById(element)
@@ -97,7 +90,6 @@ class UIManager {
     }
   }
 
-  // Animate element exit
   animateOut(element, animationType = "fadeOut") {
     if (typeof element === "string") {
       element = document.getElementById(element)
@@ -111,7 +103,6 @@ class UIManager {
     }
   }
 
-  // Update cart badge with animation
   updateCartBadge(count) {
     const badges = document.querySelectorAll("#cart-count")
     badges.forEach((badge) => {
@@ -123,7 +114,6 @@ class UIManager {
     })
   }
 
-  // Smooth scroll to element
   scrollToElement(elementId, offset = 0) {
     const element = document.getElementById(elementId)
     if (element) {
@@ -135,7 +125,6 @@ class UIManager {
     }
   }
 
-  // Toggle element visibility
   toggleElement(element, show = null) {
     if (typeof element === "string") {
       element = document.getElementById(element)
@@ -154,7 +143,6 @@ class UIManager {
     }
   }
 
-  // Create modal
   createModal(title, content, actions = []) {
     const modal = document.createElement("div")
     modal.className = "modal modal-open"
@@ -182,7 +170,6 @@ class UIManager {
     return modal
   }
 
-  // Format currency
   formatCurrency(amount, currency = "USD") {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -190,7 +177,6 @@ class UIManager {
     }).format(amount)
   }
 
-  // Validate form
   validateForm(formElement) {
     const inputs = formElement.querySelectorAll("input[required], select[required], textarea[required]")
     let isValid = true
@@ -207,7 +193,6 @@ class UIManager {
     return isValid
   }
 
-  // Debounce function
   debounce(func, wait) {
     let timeout
     return function executedFunction(...args) {
@@ -221,10 +206,8 @@ class UIManager {
   }
 }
 
-// Global UI manager instance
 const uiManager = new UIManager()
 
-// Global utility functions
 function showToast(message, type = "info", duration = 3000) {
   uiManager.showToast(message, type, duration)
 }
@@ -243,7 +226,6 @@ function hideLoading(elementId) {
   uiManager.hideLoading(elementId)
 }
 
-// Add CSS animations
 const style = document.createElement("style")
 style.textContent = `
     @keyframes slideOut {
@@ -268,5 +250,4 @@ style.textContent = `
 `
 document.head.appendChild(style)
 
-// Export UI manager for global use
 window.uiManager = uiManager
