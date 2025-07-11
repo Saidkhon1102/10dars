@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-ui",
+  "version": "1.0.0",
+  "description": "Responsive e-commerce UI with TailwindCSS, DaisyUI, and Vanilla JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "build-css": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch",
+    "build": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --minify",
+    "start": "npm run build && npm run dev"
+  },
+  "keywords": ["ecommerce", "tailwindcss", "daisyui", "vanilla-javascript", "responsive"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "daisyui": "^4.4.19",
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details - ShopHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./src/css/output.css" />
+</head>
+<body class="bg-base-100">
+  <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+    <div class="navbar-start">
+      <a href="index.html" class="btn btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back
+      </a>
+      
+    </div>
+    <div class="navbar-end">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <div class="indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01" />
+            </svg>
+            <span class="badge badge-sm badge-primary indicator-item" id="cart-count">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="hidden" id="product-details">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <div class="aspect-square bg-base-200 rounded-lg overflow-hidden">
+            <img id="product-image" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" alt="Product Image" />
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h1 id="product-title" class="text-3xl font-bold mb-2"></h1>
+            <div class="flex items-center gap-2 mb-4">
+              <div class="rating rating-sm">
+                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+              </div>
+              <span class="text-sm text-base-content/70">(4.0)</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <span id="product-price" class="text-4xl font-bold text-primary"></span>
+              <span class="text-lg text-base-content/70 line-through">$199.99</span>
+              <div class="badge badge-success">20% OFF</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Description</h3>
+            <p id="product-description" class="text-base-content/80 leading-relaxed"></p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="font-medium">Quantity:</span>
+              <div class="join">
+                <button class="btn btn-sm join-item" onclick="decreaseQuantity()">-</button>
+                <input type="number" id="quantity" value="1" min="1" class="input input-sm join-item w-16 text-center" readonly />
+                <button class="btn btn-sm join-item" onclick="increaseQuantity()">+</button>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button id="add-to-cart-btn" class="btn btn-primary flex-1 btn-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01" />
+                </svg>
+                Add to Cart
+              </button>
+              <button class="btn btn-outline flex-1 btn-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Add to Wishlist
+              </button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Features</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Free Shipping</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>30-Day Return</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>1 Year Warranty</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>24/7 Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./src/js/about.js"></script>
+  <script src="./src/js/basket.js"></script>
+  <script src="./src/js/updateUI.js"></script>
+</body>
+</html>
